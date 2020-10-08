@@ -1,10 +1,9 @@
 <!-- PROJECT LOGO -->
+<p align="center">
+  <h1 align="center">Reddit Post Video Maker</h1>
 <a href="https://www.linkedin.com/in/simon-mercier-372b6219b/">
   <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555">
   </a>
-<p align="center">
-  <h1 align="center">Reddit Post Video Maker</h1>
-
   <p align="center">
     Script that turns a Reddit post into a video
   <br/>

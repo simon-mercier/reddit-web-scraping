@@ -24,7 +24,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The YouTube algorithm often recommends me to watch videos that takes the most popular comments from a Reddit post and narrates them with text-to-speech. Seeing the millions of views these channels were gaining in a short period encouraged me to start a channel of my own.
+The YouTube algorithm often recommends me videos that takes the most popular comments from a Reddit post and narrates them with text-to-speech. Seeing the millions of views these channels were gaining in short periods encouraged me to start a channel of my own.
 
 I thought it would be a great idea to automate this laborious task of finding comments and editing every videos. 
 

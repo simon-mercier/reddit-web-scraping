@@ -1,0 +1,339 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "gTTS",
+        "importPath": "gtts",
+        "description": "gtts",
+        "isExtraImport": true,
+        "detail": "gtts",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Reddit.utils",
+        "description": "Reddit.utils",
+        "isExtraImport": true,
+        "detail": "Reddit.utils",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "MP3",
+        "importPath": "mutagen.mp3",
+        "description": "mutagen.mp3",
+        "isExtraImport": true,
+        "detail": "mutagen.mp3",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Reddit.clipMaker",
+        "description": "Reddit.clipMaker",
+        "isExtraImport": true,
+        "detail": "Reddit.clipMaker",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "webdriver",
+        "importPath": "selenium",
+        "description": "selenium",
+        "isExtraImport": true,
+        "detail": "selenium",
+        "documentation": {}
+    },
+    {
+        "label": "WebDriverWait",
+        "importPath": "selenium.webdriver.support.ui",
+        "description": "selenium.webdriver.support.ui",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support.ui",
+        "documentation": {}
+    },
+    {
+        "label": "expected_conditions",
+        "importPath": "selenium.webdriver.support",
+        "description": "selenium.webdriver.support",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support",
+        "documentation": {}
+    },
+    {
+        "label": "By",
+        "importPath": "selenium.webdriver.common.by",
+        "description": "selenium.webdriver.common.by",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.by",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Reddit.scapePost",
+        "description": "Reddit.scapePost",
+        "isExtraImport": true,
+        "detail": "Reddit.scapePost",
+        "documentation": {}
+    },
+    {
+        "label": "ActionChains",
+        "importPath": "selenium.webdriver.common.action_chains",
+        "description": "selenium.webdriver.common.action_chains",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.action_chains",
+        "documentation": {}
+    },
+    {
+        "label": "Keys",
+        "importPath": "selenium.webdriver.common.keys",
+        "description": "selenium.webdriver.common.keys",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.keys",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Reddit.comment",
+        "description": "Reddit.comment",
+        "isExtraImport": true,
+        "detail": "Reddit.comment",
+        "documentation": {}
+    },
+    {
+        "label": "StaleElementReferenceException",
+        "importPath": "selenium.common.exceptions",
+        "description": "selenium.common.exceptions",
+        "isExtraImport": true,
+        "detail": "selenium.common.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "keyboard",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "keyboard",
+        "description": "keyboard",
+        "detail": "keyboard",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "ClipMaker",
+        "kind": 6,
+        "importPath": "src.clipMaker",
+        "description": "src.clipMaker",
+        "peekOfCode": "class ClipMaker:\n    def __init__(self, framerate, number):\n        os.system(\"C:/Users/mison/PycharmProjects/Robots/venv/Lib/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe -r 5 -framerate \"+ framerate +\" -s 1920x1080 -i C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots/comment\"+number+\".png -i C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS/comment\"+number+\".mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips/clip\"+number+\".mp4\")\n#FIN CLASSE",
+        "detail": "src.clipMaker",
+        "documentation": {}
+    },
+    {
+        "label": "Comment",
+        "kind": 6,
+        "importPath": "src.comment",
+        "description": "src.comment",
+        "peekOfCode": "class Comment:\n    data = None\n    id = None\n    text = None\n    wordCount = None\n    name = None\n    screenshot = None\n    votes = None\n    level = None\n    speech = None",
+        "detail": "src.comment",
+        "documentation": {}
+    },
+    {
+        "label": "Initiate",
+        "kind": 6,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "class Initiate:\n    nightMode = None\n    #Constructor\n    def __init__(self, nightMode = False):\n        self.nightMode = nightMode\n    def initiateBrowser(self):\n        #Set incognito mode\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--incognito\")\n        #chrome_options.add_argument(\"--start-maximized\")",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "today",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "today = datetime.datetime.now()\nminNumberOfVotesQuestion = 1000\nminNumberOfVotesComment = 500\nurl = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "minNumberOfVotesQuestion",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "minNumberOfVotesQuestion = 1000\nminNumberOfVotesComment = 500\nurl = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "minNumberOfVotesComment",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "minNumberOfVotesComment = 500\nurl = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "url",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "url = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None\n    #Constructor",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "url2",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "url2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None\n    #Constructor\n    def __init__(self, nightMode = False):",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "url3",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "url3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None\n    #Constructor\n    def __init__(self, nightMode = False):\n        self.nightMode = nightMode",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "initiate",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "initiate = Initiate(False)\nbrowser = initiate.initiateBrowser()\n#firstQuestion = initiate.findFirstQuestion()\nsP = ScrapePost(browser, None)\nexit(0)",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "browser",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "browser = initiate.initiateBrowser()\n#firstQuestion = initiate.findFirstQuestion()\nsP = ScrapePost(browser, None)\nexit(0)",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "#firstQuestion",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "#firstQuestion = initiate.findFirstQuestion()\nsP = ScrapePost(browser, None)\nexit(0)",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "sP",
+        "kind": 5,
+        "importPath": "src.redditScrapper",
+        "description": "src.redditScrapper",
+        "peekOfCode": "sP = ScrapePost(browser, None)\nexit(0)",
+        "detail": "src.redditScrapper",
+        "documentation": {}
+    },
+    {
+        "label": "ScrapePost",
+        "kind": 6,
+        "importPath": "src.scapePost",
+        "description": "src.scapePost",
+        "peekOfCode": "class ScrapePost:\n    browser = None\n    question = None\n    post = None\n    comments = []\n    #Constructor\n    #@required browser\n    def __init__(self, browser=None, question=None):\n        self.question = question\n        self.browser = browser",
+        "detail": "src.scapePost",
+        "documentation": {}
+    },
+    {
+        "label": "removeFolders",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def removeFolders(path):\n    for root, dirs, files in os.walk(path):\n        for f in files:\n            os.unlink(os.path.join(root, f))\n        for d in dirs:\n            shutil.rmtree(os.path.join(root, d))\ndef waitPress(key):\n    while True:\n        try:\n            if keyboard.is_pressed(key):",
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "waitPress",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def waitPress(key):\n    while True:\n        try:\n            if keyboard.is_pressed(key):\n                break\n            else:\n                pass\n        except:\n            break\ndef roundIntToEven(int):",
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "roundIntToEven",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def roundIntToEven(int):\n    print('ini = ' + str(int) +  'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
+        "detail": "src.utils",
+        "documentation": {}
+    }
+]

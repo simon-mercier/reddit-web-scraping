@@ -9,6 +9,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "time",
         "kind": 6,
         "isExtraImport": true,
@@ -184,11 +192,29 @@
         "documentation": {}
     },
     {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
         "label": "ClipMaker",
         "kind": 6,
         "importPath": "src.clipMaker",
         "description": "src.clipMaker",
-        "peekOfCode": "class ClipMaker:\n    def __init__(self, framerate, number):\n        os.system(\"C:/Users/mison/PycharmProjects/Robots/venv/Lib/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe -r 5 -framerate \"+ framerate +\" -s 1920x1080 -i C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots/comment\"+number+\".png -i C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS/comment\"+number+\".mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips/clip\"+number+\".mp4\")\n#FIN CLASSE",
+        "peekOfCode": "class ClipMaker:\n    def __init__(self):\n        self.root_path = Path(__file__).resolve().parent.parent\n        self.ffmpeg_path = f\"{self.root_path}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\n        self.assets_path = f\"{self.root_path}/assets\"\n    def __call__(self, framerate, number):\n        os.system(f\"{self.ffmpeg_path} -r 5 -framerate {framerate} -s 1920x1080 -i {self.assets_path}/pictures/comment{number}.png -i {self.assets_path}/audio/tts{number}.mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y {self.assets_path}/clips/clip{number}.mp4\")\n#FIN CLASSE",
         "detail": "src.clipMaker",
         "documentation": {}
     },
@@ -334,6 +360,24 @@
         "description": "src.utils",
         "peekOfCode": "def roundIntToEven(int):\n    print('ini = ' + str(int) +  'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
         "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "reqs",
+        "kind": 5,
+        "importPath": "import_dependencies",
+        "description": "import_dependencies",
+        "peekOfCode": "reqs = subprocess.check_output([sys.executable, '-m', 'pip',\n'freeze'])\ninstalled_packages = [r.decode().split('==')[0] for r in reqs.split()]\nprint(installed_packages)",
+        "detail": "import_dependencies",
+        "documentation": {}
+    },
+    {
+        "label": "installed_packages",
+        "kind": 5,
+        "importPath": "import_dependencies",
+        "description": "import_dependencies",
+        "peekOfCode": "installed_packages = [r.decode().split('==')[0] for r in reqs.split()]\nprint(installed_packages)",
+        "detail": "import_dependencies",
         "documentation": {}
     }
 ]

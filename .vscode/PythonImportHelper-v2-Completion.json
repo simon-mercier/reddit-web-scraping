@@ -34,6 +34,14 @@
         "documentation": {}
     },
     {
+        "label": "*",
+        "importPath": "const",
+        "description": "const",
+        "isExtraImport": true,
+        "detail": "const",
+        "documentation": {}
+    },
+    {
         "label": "time",
         "kind": 6,
         "isExtraImport": true,
@@ -105,6 +113,14 @@
         "description": "pathlib",
         "isExtraImport": true,
         "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Scrapper",
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "isExtraImport": true,
+        "detail": "scrapper",
         "documentation": {}
     },
     {
@@ -181,6 +197,14 @@
         "documentation": {}
     },
     {
+        "label": "Post",
+        "importPath": "post",
+        "description": "post",
+        "isExtraImport": true,
+        "detail": "post",
+        "documentation": {}
+    },
+    {
         "label": "ChromeDriverManager",
         "importPath": "webdriver_manager.chrome",
         "description": "webdriver_manager.chrome",
@@ -203,15 +227,6 @@
         "importPath": "shutil",
         "description": "shutil",
         "detail": "shutil",
-        "documentation": {}
-    },
-    {
-        "label": "keyboard",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "keyboard",
-        "description": "keyboard",
-        "detail": "keyboard",
         "documentation": {}
     },
     {
@@ -336,7 +351,7 @@
         "kind": 6,
         "importPath": "src.scrapper",
         "description": "src.scrapper",
-        "peekOfCode": "class Scrapper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self):\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        self.browser = webdriver.Chrome(\n            executable_path=CM().install(), options=chrome_options)",
+        "peekOfCode": "class Scrapper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        self.browser = webdriver.Chrome(\n            executable_path=CM().install(), options=chrome_options)",
         "detail": "src.scrapper",
         "documentation": {}
     },
@@ -345,16 +360,7 @@
         "kind": 2,
         "importPath": "src.utils",
         "description": "src.utils",
-        "peekOfCode": "def removeFolders(path):\n    for root, dirs, files in os.walk(path):\n        for f in files:\n            os.unlink(os.path.join(root, f))\n        for d in dirs:\n            shutil.rmtree(os.path.join(root, d))\ndef waitPress(key):\n    while True:\n        try:\n            if keyboard.is_pressed(key):",
-        "detail": "src.utils",
-        "documentation": {}
-    },
-    {
-        "label": "waitPress",
-        "kind": 2,
-        "importPath": "src.utils",
-        "description": "src.utils",
-        "peekOfCode": "def waitPress(key):\n    while True:\n        try:\n            if keyboard.is_pressed(key):\n                break\n            else:\n                pass\n        except:\n            break\ndef roundIntToEven(int):",
+        "peekOfCode": "def removeFolders(path):\n    for root, dirs, files in os.walk(path):\n        for f in files:\n            os.unlink(os.path.join(root, f))\n        for d in dirs:\n            shutil.rmtree(os.path.join(root, d))\ndef roundIntToEven(int):\n    print('ini = ' + str(int) + 'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
         "detail": "src.utils",
         "documentation": {}
     },
@@ -363,7 +369,7 @@
         "kind": 2,
         "importPath": "src.utils",
         "description": "src.utils",
-        "peekOfCode": "def roundIntToEven(int):\n    print('ini = ' + str(int) +  'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
+        "peekOfCode": "def roundIntToEven(int):\n    print('ini = ' + str(int) + 'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
         "detail": "src.utils",
         "documentation": {}
     }

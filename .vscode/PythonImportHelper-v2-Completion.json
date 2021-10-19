@@ -9,11 +9,28 @@
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
+        "label": "path",
+        "importPath": "os",
+        "description": "os",
         "isExtraImport": true,
-        "detail": "pathlib",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "const",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "const",
+        "description": "const",
+        "detail": "const",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "const",
+        "description": "const",
+        "isExtraImport": true,
+        "detail": "const",
         "documentation": {}
     },
     {
@@ -22,6 +39,14 @@
         "isExtraImport": true,
         "importPath": "time",
         "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "sleep",
+        "importPath": "time",
+        "description": "time",
+        "isExtraImport": true,
         "detail": "time",
         "documentation": {}
     },
@@ -44,10 +69,10 @@
     },
     {
         "label": "*",
-        "importPath": "Reddit.utils",
-        "description": "Reddit.utils",
+        "importPath": "utils",
+        "description": "utils",
         "isExtraImport": true,
-        "detail": "Reddit.utils",
+        "detail": "utils",
         "documentation": {}
     },
     {
@@ -68,19 +93,43 @@
     },
     {
         "label": "*",
-        "importPath": "Reddit.clipMaker",
-        "description": "Reddit.clipMaker",
+        "importPath": "clipMaker",
+        "description": "clipMaker",
         "isExtraImport": true,
-        "detail": "Reddit.clipMaker",
+        "detail": "clipMaker",
         "documentation": {}
     },
     {
-        "label": "datetime",
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Reddit.comment",
+        "description": "Reddit.comment",
+        "isExtraImport": true,
+        "detail": "Reddit.comment",
+        "documentation": {}
+    },
+    {
+        "label": "StaleElementReferenceException",
+        "importPath": "selenium.common.exceptions",
+        "description": "selenium.common.exceptions",
+        "isExtraImport": true,
+        "detail": "selenium.common.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "random",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "datetime",
-        "description": "datetime",
-        "detail": "datetime",
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
         "documentation": {}
     },
     {
@@ -116,14 +165,6 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "Reddit.scapePost",
-        "description": "Reddit.scapePost",
-        "isExtraImport": true,
-        "detail": "Reddit.scapePost",
-        "documentation": {}
-    },
-    {
         "label": "ActionChains",
         "importPath": "selenium.webdriver.common.action_chains",
         "description": "selenium.webdriver.common.action_chains",
@@ -140,28 +181,19 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "Reddit.comment",
-        "description": "Reddit.comment",
+        "label": "ChromeDriverManager",
+        "importPath": "webdriver_manager.chrome",
+        "description": "webdriver_manager.chrome",
         "isExtraImport": true,
-        "detail": "Reddit.comment",
+        "detail": "webdriver_manager.chrome",
         "documentation": {}
     },
     {
-        "label": "StaleElementReferenceException",
-        "importPath": "selenium.common.exceptions",
-        "description": "selenium.common.exceptions",
+        "label": "Comment",
+        "importPath": "comment",
+        "description": "comment",
         "isExtraImport": true,
-        "detail": "selenium.common.exceptions",
-        "documentation": {}
-    },
-    {
-        "label": "random",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "random",
-        "description": "random",
-        "detail": "random",
+        "detail": "comment",
         "documentation": {}
     },
     {
@@ -192,29 +224,11 @@
         "documentation": {}
     },
     {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
-        "documentation": {}
-    },
-    {
-        "label": "subprocess",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "subprocess",
-        "description": "subprocess",
-        "detail": "subprocess",
-        "documentation": {}
-    },
-    {
         "label": "ClipMaker",
         "kind": 6,
         "importPath": "src.clipMaker",
         "description": "src.clipMaker",
-        "peekOfCode": "class ClipMaker:\n    def __init__(self):\n        self.root_path = Path(__file__).resolve().parent.parent\n        self.ffmpeg_path = f\"{self.root_path}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\n        self.assets_path = f\"{self.root_path}/assets\"\n    def __call__(self, framerate, number):\n        os.system(f\"{self.ffmpeg_path} -r 5 -framerate {framerate} -s 1920x1080 -i {self.assets_path}/pictures/comment{number}.png -i {self.assets_path}/audio/tts{number}.mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y {self.assets_path}/clips/clip{number}.mp4\")\n#FIN CLASSE",
+        "peekOfCode": "class ClipMaker:\n    def __call__(self, framerate, number):\n        os.system(f\"{const.FFMPEG_PATH} -r 5 -framerate {framerate} -s 1920x1080 -i {const.ASSETS_PATH}/pictures/comment{number}.png -i {const.ASSETS_PATH}/audio/tts{number}.mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y {const.ASSETS_PATH}/clips/clip{number}.mp4\")\n#FIN CLASSE",
         "detail": "src.clipMaker",
         "documentation": {}
     },
@@ -223,107 +237,89 @@
         "kind": 6,
         "importPath": "src.comment",
         "description": "src.comment",
-        "peekOfCode": "class Comment:\n    data = None\n    id = None\n    text = None\n    wordCount = None\n    name = None\n    screenshot = None\n    votes = None\n    level = None\n    speech = None",
+        "peekOfCode": "class Comment:\n    def __init__(self, text, level):\n        self.text = text\n        self.level = level\n    def print(self):\n        if DEBUG and self.text is not None:\n            print(\"\\n[#START COMMENT\")\n            print(\"Level = \" + str(self.level))\n            print(\"Text = \" + self.text)\n            print(\"Word Count = \" + str(self.wordCount))",
         "detail": "src.comment",
         "documentation": {}
     },
     {
-        "label": "Initiate",
+        "label": "ROOT_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent.parent\nFFMPEG_PATH = f\"{ROOT_PATH}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\nASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "FFMPEG_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "FFMPEG_PATH = f\"{ROOT_PATH}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\nASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "ASSETS_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "ASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MIN_NUMBER_VOTES_QUESTION",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MIN_NUMBER_VOTES_COMMENT_PERCENTAGE",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_COMMENTS",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_PARSED_COMMENTS",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "DEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "Post",
         "kind": 6,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "class Initiate:\n    nightMode = None\n    #Constructor\n    def __init__(self, nightMode = False):\n        self.nightMode = nightMode\n    def initiateBrowser(self):\n        #Set incognito mode\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--incognito\")\n        #chrome_options.add_argument(\"--start-maximized\")",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "today",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "today = datetime.datetime.now()\nminNumberOfVotesQuestion = 1000\nminNumberOfVotesComment = 500\nurl = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "minNumberOfVotesQuestion",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "minNumberOfVotesQuestion = 1000\nminNumberOfVotesComment = 500\nurl = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "minNumberOfVotesComment",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "minNumberOfVotesComment = 500\nurl = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "url",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "url = \"https://www.reddit.com/\"\nurl2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None\n    #Constructor",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "url2",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "url2 = \"https://www.reddit.com/r/AskReddit/\"\nurl3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None\n    #Constructor\n    def __init__(self, nightMode = False):",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "url3",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "url3 = \"https://www.reddit.com/r/Showerthoughts/\"\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoClips')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoScreenshots')\nremoveFolders('C:/Users/mison/PycharmProjects/Robots/Reddit/Video/VideoTTS')\n#DEBUT CLASSE\nclass Initiate:\n    nightMode = None\n    #Constructor\n    def __init__(self, nightMode = False):\n        self.nightMode = nightMode",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "initiate",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "initiate = Initiate(False)\nbrowser = initiate.initiateBrowser()\n#firstQuestion = initiate.findFirstQuestion()\nsP = ScrapePost(browser, None)\nexit(0)",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "browser",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "browser = initiate.initiateBrowser()\n#firstQuestion = initiate.findFirstQuestion()\nsP = ScrapePost(browser, None)\nexit(0)",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "#firstQuestion",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "#firstQuestion = initiate.findFirstQuestion()\nsP = ScrapePost(browser, None)\nexit(0)",
-        "detail": "src.redditScrapper",
-        "documentation": {}
-    },
-    {
-        "label": "sP",
-        "kind": 5,
-        "importPath": "src.redditScrapper",
-        "description": "src.redditScrapper",
-        "peekOfCode": "sP = ScrapePost(browser, None)\nexit(0)",
-        "detail": "src.redditScrapper",
+        "importPath": "src.post",
+        "description": "src.post",
+        "peekOfCode": "class Post(object):\n    def __init__(self, title, author, url):\n        self.title = title\n        self.author = author\n        self.url = url",
+        "detail": "src.post",
         "documentation": {}
     },
     {
@@ -333,6 +329,15 @@
         "description": "src.scapePost",
         "peekOfCode": "class ScrapePost:\n    browser = None\n    question = None\n    post = None\n    comments = []\n    #Constructor\n    #@required browser\n    def __init__(self, browser=None, question=None):\n        self.question = question\n        self.browser = browser",
         "detail": "src.scapePost",
+        "documentation": {}
+    },
+    {
+        "label": "Scrapper",
+        "kind": 6,
+        "importPath": "src.scrapper",
+        "description": "src.scrapper",
+        "peekOfCode": "class Scrapper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self):\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        self.browser = webdriver.Chrome(\n            executable_path=CM().install(), options=chrome_options)",
+        "detail": "src.scrapper",
         "documentation": {}
     },
     {
@@ -360,24 +365,6 @@
         "description": "src.utils",
         "peekOfCode": "def roundIntToEven(int):\n    print('ini = ' + str(int) +  'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
         "detail": "src.utils",
-        "documentation": {}
-    },
-    {
-        "label": "reqs",
-        "kind": 5,
-        "importPath": "import_dependencies",
-        "description": "import_dependencies",
-        "peekOfCode": "reqs = subprocess.check_output([sys.executable, '-m', 'pip',\n'freeze'])\ninstalled_packages = [r.decode().split('==')[0] for r in reqs.split()]\nprint(installed_packages)",
-        "detail": "import_dependencies",
-        "documentation": {}
-    },
-    {
-        "label": "installed_packages",
-        "kind": 5,
-        "importPath": "import_dependencies",
-        "description": "import_dependencies",
-        "peekOfCode": "installed_packages = [r.decode().split('==')[0] for r in reqs.split()]\nprint(installed_packages)",
-        "detail": "import_dependencies",
         "documentation": {}
     }
 ]

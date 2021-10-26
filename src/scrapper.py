@@ -1,15 +1,18 @@
+import re
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-from post import Post
+from .post import Post
 from webdriver_manager.chrome import ChromeDriverManager as CM
 from os import path
-from const import *
+from .const import *
 from time import sleep
-from comment import Comment
+from .comment import Comment
+from .utils import *
+from better_profanity import profanity
 
 
 class Scrapper(object):
@@ -30,38 +33,79 @@ class Scrapper(object):
     def scrape_post(self) -> None:
         def create_post():
             title = self.browser.find_element_by_xpath(
-                '//*[@id="t3_prrkzj"]/div/div[3]/div[1]/div/h1').text
+                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div/h1').text
             author = self.browser.find_element_by_xpath(
-                '//*[@id="t3_prrkzj"]/div/div[2]/div/div[1]/div/a').text
-            self.post = Post(title, author, self.post_url)
+                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[2]/div/div[1]/div/a').text
+            upvotes = to_number(self.browser.find_element_by_xpath(
+                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/div/div').text)
+            self.post = Post(title, author, upvotes, self.post_url)
 
-        def create_comment() -> None:
-            pass
+        def comment_has_target_level(comment: tuple) -> bool:
+            return comment_level(comment) in TARGET_LEVELS
 
-        def is_valid_comment(comment) -> bool:
-            pass
+        def comment_text(comment: tuple) -> str:
+            return comment[0].text
 
-        def upvote_count(comment) -> int:
-            pass
+        def comment_level(comment: tuple) -> int:
+            return comment[1].text
+
+        def comment_upvotes(comment: tuple) -> int:
+            return to_number(comment[2].text)
+
+        def comment_has_enough_upvotes(comment) -> bool:
+            return comment_upvotes(comment) > self.MIN_NUMBER_UPVOTES_QUESTION
+
+        def comment_has_appropriate_char_count(comment) -> bool:
+            return len(comment_text(comment)) < MAX_CHAR_COUNT_QUESTION
+
+        def get_comments() -> tuple:
+            comments_text = self.browser.find_elements_by_xpath(
+                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div[2]/div/div/div/p')
+            comments_level = self.browser.find_elements_by_xpath(
+                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div[2]/div/span')
+            comments_upvotes = self.browser.find_elements_by_xpath(
+                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div[2]/div[3]/div[1]')
+
+            return list(zip(comments_text, comments_level,  comments_upvotes))
 
         def parse_top_comments() -> None:
             self.post.comments = []
+            self.MIN_NUMBER_UPVOTES_QUESTION = self.post.upvotes * \
+                MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE
             comment_count = 0
 
-            comments = self.browser.find_elements_by_xpath(
-                '//*[starts-with(@id,"t1_")]')
+            comments = get_comments()
+
+            skip_branch = False
 
             while len(self.post.comments) < MAX_COMMENTS and comment_count < len(comments):
                 current_comment = comments[comment_count]
                 comment_count += 1
 
-                if(upvote_count(current_comment) < MIN_NUMBER_VOTES_QUESTION):
-                    break
+                if(skip_branch):
+                    if(comment_level(current_comment) != 1):
+                        continue
+                    skip_branch = False
 
-                if(not is_valid_comment(current_comment)):
+                skip_branch = True
+                if(not comment_has_enough_upvotes(current_comment)):
+                    if(comment_level(current_comment) == 1):
+                        break
                     continue
 
-                self.post.comments.append(create_comment(current_comment))
+                if(not comment_has_target_level(current_comment)):
+                    continue
+
+                if(not comment_has_appropriate_char_count(current_comment)):
+                    continue
+
+                if(profanity.contains_profanity(comment_text(current_comment))):
+                    continue
+                skip_branch = False
+
+                self.post.comments.append(Comment(comment_text(
+                    current_comment), comment_level(current_comment), comment_upvotes(current_comment)))
 
         create_post()
         parse_top_comments()
+        print(self.post.comments)

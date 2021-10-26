@@ -1,17 +1,16 @@
-import time
-from gtts import gTTS
-import re
-from utils import *
-from PIL import Image
-from mutagen.mp3 import MP3
-from clipMaker import *
-from const import *
+# from gtts import gTTS
+from .utils import *
+# from PIL import Image
+# from mutagen.mp3 import MP3
+# from clipMaker import *
+from .const import *
 
 
 class Comment:
-    def __init__(self, text, level):
+    def __init__(self, text, level, upvotes):
         self.text = text
         self.level = level
+        self.upvotes = upvotes
 
     def print(self):
         if DEBUG and self.text is not None:

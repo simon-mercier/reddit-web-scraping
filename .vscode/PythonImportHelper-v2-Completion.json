@@ -26,44 +26,11 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "const",
-        "description": "const",
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
         "isExtraImport": true,
-        "detail": "const",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "const",
-        "description": "const",
-        "isExtraImport": true,
-        "detail": "const",
-        "documentation": {}
-    },
-    {
-        "label": "time",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "time",
-        "description": "time",
-        "detail": "time",
-        "documentation": {}
-    },
-    {
-        "label": "sleep",
-        "importPath": "time",
-        "description": "time",
-        "isExtraImport": true,
-        "detail": "time",
-        "documentation": {}
-    },
-    {
-        "label": "gTTS",
-        "importPath": "gtts",
-        "description": "gtts",
-        "isExtraImport": true,
-        "detail": "gtts",
+        "detail": "pathlib",
         "documentation": {}
     },
     {
@@ -76,51 +43,11 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "utils",
-        "description": "utils",
+        "label": "DEBUG",
+        "importPath": "re",
+        "description": "re",
         "isExtraImport": true,
-        "detail": "utils",
-        "documentation": {}
-    },
-    {
-        "label": "Image",
-        "importPath": "PIL",
-        "description": "PIL",
-        "isExtraImport": true,
-        "detail": "PIL",
-        "documentation": {}
-    },
-    {
-        "label": "MP3",
-        "importPath": "mutagen.mp3",
-        "description": "mutagen.mp3",
-        "isExtraImport": true,
-        "detail": "mutagen.mp3",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "clipMaker",
-        "description": "clipMaker",
-        "isExtraImport": true,
-        "detail": "clipMaker",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Scrapper",
-        "importPath": "scrapper",
-        "description": "scrapper",
-        "isExtraImport": true,
-        "detail": "scrapper",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -197,14 +124,6 @@
         "documentation": {}
     },
     {
-        "label": "Post",
-        "importPath": "post",
-        "description": "post",
-        "isExtraImport": true,
-        "detail": "post",
-        "documentation": {}
-    },
-    {
         "label": "ChromeDriverManager",
         "importPath": "webdriver_manager.chrome",
         "description": "webdriver_manager.chrome",
@@ -213,11 +132,19 @@
         "documentation": {}
     },
     {
-        "label": "Comment",
-        "importPath": "comment",
-        "description": "comment",
+        "label": "sleep",
+        "importPath": "time",
+        "description": "time",
         "isExtraImport": true,
-        "detail": "comment",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "profanity",
+        "importPath": "better_profanity",
+        "description": "better_profanity",
+        "isExtraImport": true,
+        "detail": "better_profanity",
         "documentation": {}
     },
     {
@@ -230,20 +157,11 @@
         "documentation": {}
     },
     {
-        "label": "math",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "math",
-        "description": "math",
-        "detail": "math",
-        "documentation": {}
-    },
-    {
         "label": "ClipMaker",
         "kind": 6,
         "importPath": "src.clipMaker",
         "description": "src.clipMaker",
-        "peekOfCode": "class ClipMaker:\n    def __call__(self, framerate, number):\n        os.system(f\"{const.FFMPEG_PATH} -r 5 -framerate {framerate} -s 1920x1080 -i {const.ASSETS_PATH}/pictures/comment{number}.png -i {const.ASSETS_PATH}/audio/tts{number}.mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y {const.ASSETS_PATH}/clips/clip{number}.mp4\")\n#FIN CLASSE",
+        "peekOfCode": "class ClipMaker:\n    def __call__(self, framerate, number):\n        os.system(f\"{const.FFMPEG_PATH} -r 5 -framerate {framerate} -s 1920x1080 -i {const.ASSETS_PATH}/pictures/comment{number}.png -i {const.ASSETS_PATH}/audio/tts{number}.mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y {const.ASSETS_PATH}/clips/clip{number}.mp4\")",
         "detail": "src.clipMaker",
         "documentation": {}
     },
@@ -252,7 +170,7 @@
         "kind": 6,
         "importPath": "src.comment",
         "description": "src.comment",
-        "peekOfCode": "class Comment:\n    def __init__(self, text, level):\n        self.text = text\n        self.level = level\n    def print(self):\n        if DEBUG and self.text is not None:\n            print(\"\\n[#START COMMENT\")\n            print(\"Level = \" + str(self.level))\n            print(\"Text = \" + self.text)\n            print(\"Word Count = \" + str(self.wordCount))",
+        "peekOfCode": "class Comment:\n    def __init__(self, text, level, upvotes):\n        self.text = text\n        self.level = level\n        self.upvotes = upvotes\n    def print(self):\n        if DEBUG and self.text is not None:\n            print(\"\\n[#START COMMENT\")\n            print(\"Level = \" + str(self.level))\n            print(\"Text = \" + self.text)",
         "detail": "src.comment",
         "documentation": {}
     },
@@ -261,7 +179,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent.parent\nFFMPEG_PATH = f\"{ROOT_PATH}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\nASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent.parent\nFFMPEG_PATH = f\"{ROOT_PATH}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\nASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -270,7 +188,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "FFMPEG_PATH = f\"{ROOT_PATH}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\nASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "peekOfCode": "FFMPEG_PATH = f\"{ROOT_PATH}/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\"\nASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -279,25 +197,16 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "ASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "peekOfCode": "ASSETS_PATH = f\"{ROOT_PATH}/assets\"\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
     {
-        "label": "MIN_NUMBER_VOTES_QUESTION",
+        "label": "MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE",
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "MIN_NUMBER_VOTES_QUESTION = 10000\nMIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "MIN_NUMBER_VOTES_COMMENT_PERCENTAGE",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "MIN_NUMBER_VOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "peekOfCode": "MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -306,7 +215,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "MAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "peekOfCode": "MAX_COMMENTS = 5\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -315,7 +224,25 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "MAX_PARSED_COMMENTS = 20\nDEBUG = True",
+        "peekOfCode": "MAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "TARGET_LEVELS",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "TARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_CHAR_COUNT_QUESTION",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -333,7 +260,7 @@
         "kind": 6,
         "importPath": "src.post",
         "description": "src.post",
-        "peekOfCode": "class Post(object):\n    def __init__(self, title, author, url):\n        self.title = title\n        self.author = author\n        self.url = url",
+        "peekOfCode": "class Post(object):\n    def __init__(self, title, author, upvotes, url):\n        self.title = title\n        self.author = author\n        self.upvotes = upvotes\n        self.url = url",
         "detail": "src.post",
         "documentation": {}
     },
@@ -356,20 +283,20 @@
         "documentation": {}
     },
     {
-        "label": "removeFolders",
+        "label": "clear_directory",
         "kind": 2,
         "importPath": "src.utils",
         "description": "src.utils",
-        "peekOfCode": "def removeFolders(path):\n    for root, dirs, files in os.walk(path):\n        for f in files:\n            os.unlink(os.path.join(root, f))\n        for d in dirs:\n            shutil.rmtree(os.path.join(root, d))\ndef roundIntToEven(int):\n    print('ini = ' + str(int) + 'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
+        "peekOfCode": "def clear_directory(directory):\n    if os.path.exists(directory):\n        shutil.rmtree(directory)\n    os.mkdir(directory)\ndef to_number(formatted_int):\n    if formatted_int.endswith('k'):\n        formatted_int = float(formatted_int.replace('k', ''))*1000\n    return int(formatted_int)",
         "detail": "src.utils",
         "documentation": {}
     },
     {
-        "label": "roundIntToEven",
+        "label": "to_number",
         "kind": 2,
         "importPath": "src.utils",
         "description": "src.utils",
-        "peekOfCode": "def roundIntToEven(int):\n    print('ini = ' + str(int) + 'final = ' + str(2 * math.floor(int / 2)))\n    return 2 * math.floor(int / 2)",
+        "peekOfCode": "def to_number(formatted_int):\n    if formatted_int.endswith('k'):\n        formatted_int = float(formatted_int.replace('k', ''))*1000\n    return int(formatted_int)",
         "detail": "src.utils",
         "documentation": {}
     }

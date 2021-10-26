@@ -1,16 +1,14 @@
 import os
 import shutil
-import math
 
 
-def removeFolders(path):
-    for root, dirs, files in os.walk(path):
-        for f in files:
-            os.unlink(os.path.join(root, f))
-        for d in dirs:
-            shutil.rmtree(os.path.join(root, d))
+def clear_directory(directory):
+    if os.path.exists(directory):
+        shutil.rmtree(directory)
+    os.mkdir(directory)
 
 
-def roundIntToEven(int):
-    print('ini = ' + str(int) + 'final = ' + str(2 * math.floor(int / 2)))
-    return 2 * math.floor(int / 2)
+def to_number(formatted_int):
+    if formatted_int.endswith('k'):
+        formatted_int = float(formatted_int.replace('k', ''))*1000
+    return int(formatted_int)

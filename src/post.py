@@ -4,3 +4,4 @@ class Post(object):
         self.author = author
         self.upvotes = upvotes
         self.url = url
+        

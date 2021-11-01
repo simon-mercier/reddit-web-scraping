@@ -2,13 +2,13 @@ import os
 import shutil
 
 
-def clear_directory(directory):
+def clear_directory(directory) -> None:
     if os.path.exists(directory):
         shutil.rmtree(directory)
     os.mkdir(directory)
 
 
-def to_number(formatted_int):
+def to_number(formatted_int) -> int:
     if formatted_int.endswith('k'):
         formatted_int = float(formatted_int.replace('k', ''))*1000
     return int(formatted_int)

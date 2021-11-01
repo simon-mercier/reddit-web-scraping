@@ -30,6 +30,8 @@ class Scrapper(object):
         search_by_top = path.join(self.post_url, '?sort=top')
         self.browser.get(search_by_top)
 
+        sleep(5)
+
     def scrape_post(self) -> None:
         def create_post():
             title = self.browser.find_element_by_xpath(
@@ -40,16 +42,16 @@ class Scrapper(object):
                 '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/div/div').text)
             self.post = Post(title, author, upvotes, self.post_url)
 
-        def comment_has_target_level(comment: tuple) -> bool:
+        def comment_has_target_level(comment: list) -> bool:
             return comment_level(comment) in TARGET_LEVELS
 
-        def comment_text(comment: tuple) -> str:
+        def comment_text(comment: list) -> str:
             return comment[0].text
 
-        def comment_level(comment: tuple) -> int:
-            return comment[1].text
+        def comment_level(comment: list) -> int:
+            return int(re.search(r"\d+", comment[1].text)[0])
 
-        def comment_upvotes(comment: tuple) -> int:
+        def comment_upvotes(comment: list) -> int:
             return to_number(comment[2].text)
 
         def comment_has_enough_upvotes(comment) -> bool:
@@ -58,13 +60,14 @@ class Scrapper(object):
         def comment_has_appropriate_char_count(comment) -> bool:
             return len(comment_text(comment)) < MAX_CHAR_COUNT_QUESTION
 
-        def get_comments() -> tuple:
+        def get_comments() -> list:
+
             comments_text = self.browser.find_elements_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div[2]/div/div/div/p')
+                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div/div/div/p')
             comments_level = self.browser.find_elements_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div[2]/div/span')
+                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div/span')
             comments_upvotes = self.browser.find_elements_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div[2]/div[3]/div[1]')
+                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div/div[3]/div[1]')
 
             return list(zip(comments_text, comments_level,  comments_upvotes))
 
@@ -78,14 +81,14 @@ class Scrapper(object):
 
             skip_branch = False
 
+            valid_comment_count = 0
+
             while len(self.post.comments) < MAX_COMMENTS and comment_count < len(comments):
                 current_comment = comments[comment_count]
                 comment_count += 1
 
-                if(skip_branch):
-                    if(comment_level(current_comment) != 1):
-                        continue
-                    skip_branch = False
+                if(skip_branch and comment_level(current_comment) != 1):
+                    continue
 
                 skip_branch = True
                 if(not comment_has_enough_upvotes(current_comment)):
@@ -103,9 +106,11 @@ class Scrapper(object):
                     continue
                 skip_branch = False
 
-                self.post.comments.append(Comment(comment_text(
-                    current_comment), comment_level(current_comment), comment_upvotes(current_comment)))
+                valid_comment = Comment(comment_text(
+                    current_comment), comment_level(current_comment), comment_upvotes(current_comment), valid_comment_count)
+                valid_comment_count += 1
+
+                self.post.comments.append(valid_comment)
 
         create_post()
         parse_top_comments()
-        print(self.post.comments)

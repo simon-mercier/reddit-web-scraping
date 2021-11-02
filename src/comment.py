@@ -18,9 +18,9 @@ class Comment:
             print("Word Count = " + str(self.wordCount))
             print("Votes = " + str(self.votes) + "\n#END COMMENT]")
 
-    def generate_mp3(self):
-        tts = gTTS(text=self.text, lang='en')
-        tts.save(f"{COMMENTS_MP3_PATH}\\comment_{self.number}.mp3")
+    def generate_audio(self):
+        tts = gTTS(text=self.text, lang='en', tld='ca')
+        tts.save(COMMENTS_AUDIO_PATH / f"comment_{self.number}.mp3")
 
     def generate_subtitles(self):
         pass

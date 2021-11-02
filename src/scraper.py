@@ -1,11 +1,5 @@
 import re
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from .post import Post
 from webdriver_manager.chrome import ChromeDriverManager as CM
 from os import path
 from .const import *
@@ -15,7 +9,7 @@ from .utils import *
 from better_profanity import profanity
 
 
-class Scrapper(object):
+class scraper(object):
     def __init__(self, post_url):
         self.post_url = post_url
         self.start_browser()
@@ -24,6 +18,8 @@ class Scrapper(object):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--incognito")
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--log-level=3')
 
         self.browser = webdriver.Chrome(
             executable_path=CM().install(), options=chrome_options)
@@ -34,13 +30,11 @@ class Scrapper(object):
 
     def scrape_post(self) -> None:
         def create_post():
-            title = self.browser.find_element_by_xpath(
+            text = self.browser.find_element_by_xpath(
                 '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div/h1').text
-            author = self.browser.find_element_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[2]/div/div[1]/div/a').text
             upvotes = to_number(self.browser.find_element_by_xpath(
                 '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/div/div').text)
-            self.post = Post(title, author, upvotes, self.post_url)
+            self.post = Comment(text, 0, upvotes, 0)
 
         def comment_has_target_level(comment: list) -> bool:
             return comment_level(comment) in TARGET_LEVELS
@@ -106,9 +100,9 @@ class Scrapper(object):
                     continue
                 skip_branch = False
 
+                valid_comment_count += 1
                 valid_comment = Comment(comment_text(
                     current_comment), comment_level(current_comment), comment_upvotes(current_comment), valid_comment_count)
-                valid_comment_count += 1
 
                 self.post.comments.append(valid_comment)
 

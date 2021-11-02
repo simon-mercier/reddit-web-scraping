@@ -51,59 +51,11 @@
         "documentation": {}
     },
     {
-        "label": "DEBUG",
-        "importPath": "re",
-        "description": "re",
-        "isExtraImport": true,
-        "detail": "re",
-        "documentation": {}
-    },
-    {
         "label": "webdriver",
         "importPath": "selenium",
         "description": "selenium",
         "isExtraImport": true,
         "detail": "selenium",
-        "documentation": {}
-    },
-    {
-        "label": "WebDriverWait",
-        "importPath": "selenium.webdriver.support.ui",
-        "description": "selenium.webdriver.support.ui",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.support.ui",
-        "documentation": {}
-    },
-    {
-        "label": "expected_conditions",
-        "importPath": "selenium.webdriver.support",
-        "description": "selenium.webdriver.support",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.support",
-        "documentation": {}
-    },
-    {
-        "label": "By",
-        "importPath": "selenium.webdriver.common.by",
-        "description": "selenium.webdriver.common.by",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.common.by",
-        "documentation": {}
-    },
-    {
-        "label": "ActionChains",
-        "importPath": "selenium.webdriver.common.action_chains",
-        "description": "selenium.webdriver.common.action_chains",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.common.action_chains",
-        "documentation": {}
-    },
-    {
-        "label": "Keys",
-        "importPath": "selenium.webdriver.common.keys",
-        "description": "selenium.webdriver.common.keys",
-        "isExtraImport": true,
-        "detail": "selenium.webdriver.common.keys",
         "documentation": {}
     },
     {
@@ -196,7 +148,16 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent\nFFMPEG_PATH = Path.joinpath(\n    ROOT_PATH, \"/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\")\nASSETS_PATH = Path.joinpath(ROOT_PATH, \"/assets\")\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent.parent\nSRC_PATH = ROOT_PATH / 'src'\nFFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "SRC_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "SRC_PATH = ROOT_PATH / 'src'\nFFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'",
         "detail": "src.const",
         "documentation": {}
     },
@@ -205,7 +166,16 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "FFMPEG_PATH = Path.joinpath(\n    ROOT_PATH, \"/venv/site-packages/imageio_ffmpeg/binaries/ffmpeg-win32-v4.1.exe\")\nASSETS_PATH = Path.joinpath(ROOT_PATH, \"/assets\")\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")",
+        "peekOfCode": "FFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "FFPROBE_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "FFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20",
         "detail": "src.const",
         "documentation": {}
     },
@@ -214,61 +184,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "ASSETS_PATH = Path.joinpath(ROOT_PATH, \"/assets\")\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "MAX_COMMENTS",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "MAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "MAX_PARSED_COMMENTS",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "MAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "TARGET_LEVELS",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "TARGET_LEVELS = [1, 2]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "MAX_CHAR_COUNT_QUESTION",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "MAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
-        "detail": "src.const",
-        "documentation": {}
-    },
-    {
-        "label": "DEBUG",
-        "kind": 5,
-        "importPath": "src.const",
-        "description": "src.const",
-        "peekOfCode": "DEBUG = True\nTEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
+        "peekOfCode": "ASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]",
         "detail": "src.const",
         "documentation": {}
     },
@@ -277,7 +193,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "TEMP_PATH = Path.joinpath(ROOT_PATH, \"temp\")\nSTOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
+        "peekOfCode": "TEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300",
         "detail": "src.const",
         "documentation": {}
     },
@@ -286,35 +202,98 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "STOCK_VIDEO_PATH = Path.joinpath(TEMP_PATH, \"stock_videos\")\nCOMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
+        "peekOfCode": "STOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
     {
-        "label": "COMMENTS_MP3_PATH",
+        "label": "POST_VIDEO_PATH",
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "COMMENTS_MP3_PATH = Path.joinpath(TEMP_PATH, \"comments_mp3\")",
+        "peekOfCode": "POST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
     {
-        "label": "Post",
-        "kind": 6,
-        "importPath": "src.post",
-        "description": "src.post",
-        "peekOfCode": "class Post(object):\n    def __init__(self, title, author, upvotes, url):\n        self.title = title\n        self.author = author\n        self.upvotes = upvotes\n        self.url = url",
-        "detail": "src.post",
+        "label": "COMMENTS_AUDIO_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "COMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
         "documentation": {}
     },
     {
-        "label": "Scrapper",
+        "label": "POST_AUDIO_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "POST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_COMMENTS",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_PARSED_COMMENTS",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "TARGET_LEVELS",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "TARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_CHAR_COUNT_QUESTION",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "MAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "DEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "scraper",
         "kind": 6,
-        "importPath": "src.scrapper",
-        "description": "src.scrapper",
-        "peekOfCode": "class Scrapper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        self.browser = webdriver.Chrome(\n            executable_path=CM().install(), options=chrome_options)",
-        "detail": "src.scrapper",
+        "importPath": "src.scraper",
+        "description": "src.scraper",
+        "peekOfCode": "class scraper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        chrome_options.add_argument('--headless')\n        chrome_options.add_argument('--log-level=3')",
+        "detail": "src.scraper",
         "documentation": {}
     },
     {
@@ -340,7 +319,7 @@
         "kind": 6,
         "importPath": "src.video_maker",
         "description": "src.video_maker",
-        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv()\n        self.py_pexel = PyPexels(api_key=os.getenv('PEXEL_API_KEY'))\n    def generate_video(self) -> None:\n        reddit_post_url = \"https://www.reddit.com/r/AskReddit/comments/qemor9/if_brands_were_brutally_honest_what_brand_would\"\n        def scrape_page():\n            self.scrapper = Scrapper(reddit_post_url)\n            self.scrapper.scrape_post()\n        def get_stock_videos():",
+        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv()\n        self.py_pexel = PyPexels(api_key=os.getenv('PEXEL_API_KEY'))\n    def generate_video(self) -> None:\n        reddit_post_url = \"https://www.reddit.com/r/AskReddit/comments/qemor9/if_brands_were_brutally_honest_what_brand_would\"\n        def scrape_page():\n            self.scraper = scraper(reddit_post_url)\n            self.scraper.scrape_post()\n        def generate_comments():",
         "detail": "src.video_maker",
         "documentation": {}
     }

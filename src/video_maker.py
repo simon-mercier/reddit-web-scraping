@@ -1,7 +1,6 @@
 from .scraper import scraper
 import requests
 from .const import *
-from pypexels import PyPexels
 import os
 from dotenv import load_dotenv
 import nltk
@@ -10,13 +9,14 @@ import nltk
 class VideoMaker(object):
     def __init__(self):
         load_dotenv()
-        self.py_pexel = PyPexels(api_key=os.getenv('PEXEL_API_KEY'))
         self.clean_repo()
 
     def generate_video(self) -> None:
-        reddit_post_url = "https://www.reddit.com/r/AskReddit/comments/qemor9/if_brands_were_brutally_honest_what_brand_would"
+        print("Generating video...")
+        reddit_post_url = "https://www.reddit.com/r/AmItheAsshole/comments/ql3dzv/aita_for_telling_my_boyfriend_that_i_dont_want_to/"
 
         def scrape_post():
+            print(f"Scraping post @ {reddit_post_url}...")
             self.scraper = scraper(reddit_post_url)
             self.scraper.scrape_post(include_comments=False)
 
@@ -45,12 +45,12 @@ class VideoMaker(object):
                 pexels_api_responses = []
 
                 for noun in self.nouns:
-                    search_videos_page = self.py_pexel.videos_search(
-                        query=noun, per_page=80, orientation="portrait")
-                    pexels_api_responses.append(search_videos_page)
+                    search_videos_page = requests.get(
+                        f"https://api.pexels.com/videos/search?query={noun}&per_page=80&page=1&orientation=portrait", headers={'Authorization': "563492ad6f91700001000001bdaaa398868440ed9c65d335593e5d7e",  'Content-Type': 'application/json'})
+                    pexels_api_responses.append(search_videos_page.json())
 
                 self.sorted_api_responses = sorted(
-                    pexels_api_responses, key=lambda x: x.total_results, reverse=True)
+                    pexels_api_responses, key=lambda x: x['total_results'], reverse=True)
 
             def download_pexels_videos():
                 print("Downloading videos from Pexels API...")
@@ -61,22 +61,23 @@ class VideoMaker(object):
                     raise Exception(
                         "No videos found in the pexels api. Please try again.")
                 elif(len(self.sorted_api_responses) == 1):
-                    zipped_entries = list(self.sorted_api_responses[0].entries)
+                    zipped_entries = list(
+                        self.sorted_api_responses[0]['videos'])
                 elif(len(self.sorted_api_responses) == 2):
                     zipped_entries = list(zip(
-                        self.sorted_api_responses[0].entries, self.sorted_api_responses[1].entries))
+                        self.sorted_api_responses[0]['videos'], self.sorted_api_responses[1]['videos']))
                 else:
                     zipped_entries = list(zip(
-                        self.sorted_api_responses[0].entries, self.sorted_api_responses[1].entries, self.sorted_api_responses[2].entries))
+                        self.sorted_api_responses[0]['videos'], self.sorted_api_responses[1]['videos'], self.sorted_api_responses[2]['videos']))
 
                 if(len(self.sorted_api_responses) != 1):
                     zipped_entries = set([
-                        item for sublist in zipped_entries for item in sublist])
-
+                        list(item) for sublist in zipped_entries for item in sublist]
+                    )
                 for index, video in enumerate(zipped_entries):
                     # get the video
                     data_url = 'https://www.pexels.com/video/' + \
-                        str(video.id) + '/download'
+                        str(video['id']) + '/download'
                     r = requests.get(data_url)
 
                     # download the video
@@ -89,7 +90,7 @@ class VideoMaker(object):
                     os.remove(STOCK_VIDEO_PATH /
                               f"stock_video_{index}_temp.mp4")
 
-                    total_video_time += video.duration
+                    total_video_time += video['duration']
 
                     if(total_video_time > self.scraper.post.audio_len+20):
                         break

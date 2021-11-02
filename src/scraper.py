@@ -18,7 +18,7 @@ class scraper(object):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--incognito")
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         chrome_options.add_argument('--log-level=3')
 
         self.browser = webdriver.Chrome(
@@ -26,7 +26,7 @@ class scraper(object):
         search_by_top = path.join(self.post_url, '?sort=top')
         self.browser.get(search_by_top)
 
-        sleep(2)
+        sleep(4)
 
     def scrape_post(self, include_comments: bool) -> None:
         def create_post():

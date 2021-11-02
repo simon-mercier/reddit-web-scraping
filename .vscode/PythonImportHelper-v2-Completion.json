@@ -118,14 +118,6 @@
         "documentation": {}
     },
     {
-        "label": "PyPexels",
-        "importPath": "pypexels",
-        "description": "pypexels",
-        "isExtraImport": true,
-        "detail": "pypexels",
-        "documentation": {}
-    },
-    {
         "label": "load_dotenv",
         "importPath": "dotenv",
         "description": "dotenv",
@@ -372,7 +364,7 @@
         "kind": 6,
         "importPath": "src.scraper",
         "description": "src.scraper",
-        "peekOfCode": "class scraper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        chrome_options.add_argument('--headless')\n        chrome_options.add_argument('--log-level=3')",
+        "peekOfCode": "class scraper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        # chrome_options.add_argument('--headless')\n        chrome_options.add_argument('--log-level=3')",
         "detail": "src.scraper",
         "documentation": {}
     },
@@ -399,7 +391,7 @@
         "kind": 6,
         "importPath": "src.video_maker",
         "description": "src.video_maker",
-        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv()\n        self.py_pexel = PyPexels(api_key=os.getenv('PEXEL_API_KEY'))\n        self.clean_repo()\n    def generate_video(self) -> None:\n        reddit_post_url = \"https://www.reddit.com/r/AskReddit/comments/qemor9/if_brands_were_brutally_honest_what_brand_would\"\n        def scrape_post():\n            self.scraper = scraper(reddit_post_url)\n            self.scraper.scrape_post(include_comments=False)",
+        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv()\n        self.clean_repo()\n    def generate_video(self) -> None:\n        print(\"Generating video...\")\n        reddit_post_url = \"https://www.reddit.com/r/AmItheAsshole/comments/ql3dzv/aita_for_telling_my_boyfriend_that_i_dont_want_to/\"\n        def scrape_post():\n            print(f\"Scraping post @ {reddit_post_url}...\")\n            self.scraper = scraper(reddit_post_url)",
         "detail": "src.video_maker",
         "documentation": {}
     },

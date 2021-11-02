@@ -26,9 +26,9 @@ class scraper(object):
         search_by_top = path.join(self.post_url, '?sort=top')
         self.browser.get(search_by_top)
 
-        sleep(5)
+        sleep(2)
 
-    def scrape_post(self) -> None:
+    def scrape_post(self, include_comments: bool) -> None:
         def create_post():
             text = self.browser.find_element_by_xpath(
                 '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div/h1').text
@@ -65,7 +65,7 @@ class scraper(object):
 
             return list(zip(comments_text, comments_level,  comments_upvotes))
 
-        def parse_top_comments() -> None:
+        def scrape_comments() -> None:
             self.post.comments = []
             self.MIN_NUMBER_UPVOTES_QUESTION = self.post.upvotes * \
                 MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE
@@ -107,4 +107,5 @@ class scraper(object):
                 self.post.comments.append(valid_comment)
 
         create_post()
-        parse_top_comments()
+        if(include_comments):
+            scrape_comments()

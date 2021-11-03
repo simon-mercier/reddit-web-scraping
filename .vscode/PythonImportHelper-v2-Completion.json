@@ -76,19 +76,11 @@
         "documentation": {}
     },
     {
-        "label": "webdriver",
-        "importPath": "selenium",
-        "description": "selenium",
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
         "isExtraImport": true,
-        "detail": "selenium",
-        "documentation": {}
-    },
-    {
-        "label": "ChromeDriverManager",
-        "importPath": "webdriver_manager.chrome",
-        "description": "webdriver_manager.chrome",
-        "isExtraImport": true,
-        "detail": "webdriver_manager.chrome",
+        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -100,21 +92,21 @@
         "documentation": {}
     },
     {
-        "label": "shutil",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "shutil",
-        "description": "shutil",
-        "detail": "shutil",
-        "documentation": {}
-    },
-    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
         "documentation": {}
     },
     {
@@ -202,7 +194,7 @@
         "kind": 6,
         "importPath": "src.comment",
         "description": "src.comment",
-        "peekOfCode": "class Comment:\n    def __init__(self, text, level, upvotes, number):\n        self.text = text\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n    def generate_audio(self):\n        sanitized_text = profanity.censor(self.text, censor_char=' ')\n        if USE_GTTS:\n            tts = gTTS(text=sanitized_text, lang='en')",
+        "peekOfCode": "class Comment:\n    def __init__(self, level, upvotes, number, text, title=None, author=None):\n        self.text = text\n        self.title = title\n        self.author = author\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n    def generate_audio(self):\n        sanitized_text = profanity.censor(",
         "detail": "src.comment",
         "documentation": {}
     },
@@ -211,7 +203,7 @@
         "kind": 5,
         "importPath": "src.comment",
         "description": "src.comment",
-        "peekOfCode": "USE_GTTS = True\nclass Comment:\n    def __init__(self, text, level, upvotes, number):\n        self.text = text\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n    def generate_audio(self):\n        sanitized_text = profanity.censor(self.text, censor_char=' ')\n        if USE_GTTS:",
+        "peekOfCode": "USE_GTTS = True\nclass Comment:\n    def __init__(self, level, upvotes, number, text, title=None, author=None):\n        self.text = text\n        self.title = title\n        self.author = author\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n    def generate_audio(self):",
         "detail": "src.comment",
         "documentation": {}
     },
@@ -364,7 +356,7 @@
         "kind": 6,
         "importPath": "src.scraper",
         "description": "src.scraper",
-        "peekOfCode": "class scraper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        chrome_options = webdriver.ChromeOptions()\n        chrome_options.add_argument(\"--start-maximized\")\n        chrome_options.add_argument(\"--incognito\")\n        # chrome_options.add_argument('--headless')\n        chrome_options.add_argument('--log-level=3')",
+        "peekOfCode": "class scraper(object):\n    def __init__(self, post_url):\n        self.post_url = post_url\n        self.start_browser()\n    def start_browser(self) -> None:\n        search_by_top = path.join(self.post_url, '?sort=top')\n        headers = {\n            'User-Agent': 'Chrome/51.0.2704.103 Safari/537.36'}\n        source = requests.get(search_by_top, headers=headers)\n        self.page = soup(source.text, \"html.parser\")",
         "detail": "src.scraper",
         "documentation": {}
     },
@@ -391,7 +383,7 @@
         "kind": 6,
         "importPath": "src.video_maker",
         "description": "src.video_maker",
-        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv()\n        self.clean_repo()\n    def generate_video(self) -> None:\n        print(\"Generating video...\")\n        reddit_post_url = \"https://www.reddit.com/r/AmItheAsshole/comments/ql3dzv/aita_for_telling_my_boyfriend_that_i_dont_want_to/\"\n        def scrape_post():\n            print(f\"Scraping post @ {reddit_post_url}...\")\n            self.scraper = scraper(reddit_post_url)",
+        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv(SRC_PATH / '.env')\n        self.clean_repo()\n    def generate_video(self) -> None:\n        print(\"Generating video...\")\n        reddit_post_url = \"https://www.reddit.com/r/AmItheAsshole/comments/ql79c7/aita_for_saying_if_my_sister_is_too_stupid_to/\"\n        def scrape_post():\n            print(f\"Scraping post @ {reddit_post_url}...\")\n            self.scraper = scraper(reddit_post_url)",
         "detail": "src.video_maker",
         "documentation": {}
     },

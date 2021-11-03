@@ -1,12 +1,12 @@
 import re
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager as CM
+from bs4 import BeautifulSoup as soup
 from os import path
 from .const import *
 from time import sleep
 from .comment import Comment
 from .utils import *
 from better_profanity import profanity
+import requests
 
 
 class scraper(object):
@@ -15,26 +15,26 @@ class scraper(object):
         self.start_browser()
 
     def start_browser(self) -> None:
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("--start-maximized")
-        chrome_options.add_argument("--incognito")
-        # chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--log-level=3')
 
-        self.browser = webdriver.Chrome(
-            executable_path=CM().install(), options=chrome_options)
         search_by_top = path.join(self.post_url, '?sort=top')
-        self.browser.get(search_by_top)
-
-        sleep(4)
+        headers = {
+            'User-Agent': 'Chrome/51.0.2704.103 Safari/537.36'}
+        source = requests.get(search_by_top, headers=headers)
+        self.page = soup(source.text, "html.parser")
 
     def scrape_post(self, include_comments: bool) -> None:
         def create_post():
-            text = self.browser.find_element_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div/h1').text
-            upvotes = to_number(self.browser.find_element_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/div/div').text)
-            self.post = Comment(text, 0, upvotes, 0)
+            title = self.page.find(
+                'h1', {'class': '_eYtD2XCVieq6emjKBH3m'}).text
+
+            text = self.page.find(
+                'div', {'class': '_292iotee39Lmt0MkQZ2hPV'}).text
+
+            upvotes = to_number(self.page.find(
+                'div', {'class': '_1E9mcoVn4MYnuBQSVDt1gC'}).text)
+
+            self.post = Comment(level=0, number=0, title=title,
+                                text=text, upvotes=upvotes, author=None)
 
         def comment_has_target_level(comment: list) -> bool:
             return comment_level(comment) in TARGET_LEVELS
@@ -56,12 +56,13 @@ class scraper(object):
 
         def get_comments() -> list:
 
-            comments_text = self.browser.find_elements_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div/div/div/p')
-            comments_level = self.browser.find_elements_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div/span')
-            comments_upvotes = self.browser.find_elements_by_xpath(
-                '/html/body/div[1]/div/div[2]/div[2]/div/div[3]/div[1]/div[2]/div[6]/div/div/div/div/div/div/div/div/div/div[3]/div[1]')
+            comments_text = self.page.find_all(
+                'div', {'class': '_1qeIAgB0cPwnLhDF9XSiJM'}).text
+            comments_level = self.page.find_all(
+                'div', {'class': '_1RIl585IYPW6cmNXwgRz0J'}).text
+            comments_upvotes = self.page.find_all(
+                'div', {'class': '_1E9mcoVn4MYnuBQSVDt1gC'}).text
+            comments_upvotes = comments_upvotes[1:]
 
             return list(zip(comments_text, comments_level,  comments_upvotes))
 
@@ -101,8 +102,8 @@ class scraper(object):
                 skip_branch = False
 
                 valid_comment_count += 1
-                valid_comment = Comment(comment_text(
-                    current_comment), comment_level(current_comment), comment_upvotes(current_comment), valid_comment_count)
+                valid_comment = Comment(text=comment_text(
+                    current_comment), level=comment_level(current_comment), upvotes=comment_upvotes(current_comment), number=valid_comment_count)
 
                 self.post.comments.append(valid_comment)
 

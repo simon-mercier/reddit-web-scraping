@@ -1,28 +1,11 @@
 [
     {
-        "label": "os",
+        "label": "re",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "os",
-        "description": "os",
-        "isExtraImport": true,
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "const",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "const",
-        "description": "const",
-        "detail": "const",
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -59,6 +42,15 @@
         "documentation": {}
     },
     {
+        "label": "cv2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cv2",
+        "description": "cv2",
+        "detail": "cv2",
+        "documentation": {}
+    },
+    {
         "label": "Path",
         "importPath": "pathlib",
         "description": "pathlib",
@@ -67,20 +59,28 @@
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
         "label": "BeautifulSoup",
         "importPath": "bs4",
         "description": "bs4",
         "isExtraImport": true,
         "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "os",
+        "description": "os",
+        "isExtraImport": true,
+        "detail": "os",
         "documentation": {}
     },
     {
@@ -181,20 +181,11 @@
         "documentation": {}
     },
     {
-        "label": "ClipMaker",
-        "kind": 6,
-        "importPath": "src.clipMaker",
-        "description": "src.clipMaker",
-        "peekOfCode": "class ClipMaker:\n    def __call__(self, framerate, number):\n        os.system(f\"{const.FFMPEG_PATH} -r 5 -framerate {framerate} -s 1920x1080 -i {const.ASSETS_PATH}/pictures/comment{number}.png -i {const.ASSETS_PATH}/audio/tts{number}.mp3 -pix_fmt yuv420p -vcodec libx264 -acodec copy -y {const.ASSETS_PATH}/clips/clip{number}.mp4\")",
-        "detail": "src.clipMaker",
-        "documentation": {}
-    },
-    {
         "label": "Comment",
         "kind": 6,
         "importPath": "src.comment",
         "description": "src.comment",
-        "peekOfCode": "class Comment:\n    def __init__(self, level, upvotes, number, text, title=None, author=None):\n        self.text = text\n        self.title = title\n        self.author = author\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n    def generate_audio(self):\n        sanitized_text = profanity.censor(",
+        "peekOfCode": "class Comment:\n    total_audio_len = 0\n    def __init__(self, level, upvotes, number, text, title=None, author=None):\n        self.text = text\n        self.title = title\n        self.author = author\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n        self.clean_text()",
         "detail": "src.comment",
         "documentation": {}
     },
@@ -203,7 +194,7 @@
         "kind": 5,
         "importPath": "src.comment",
         "description": "src.comment",
-        "peekOfCode": "USE_GTTS = True\nclass Comment:\n    def __init__(self, level, upvotes, number, text, title=None, author=None):\n        self.text = text\n        self.title = title\n        self.author = author\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number\n    def generate_audio(self):",
+        "peekOfCode": "USE_GTTS = True\nclass Comment:\n    total_audio_len = 0\n    def __init__(self, level, upvotes, number, text, title=None, author=None):\n        self.text = text\n        self.title = title\n        self.author = author\n        self.level = level\n        self.upvotes = upvotes\n        self.number = number",
         "detail": "src.comment",
         "documentation": {}
     },
@@ -212,7 +203,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent.parent\nSRC_PATH = ROOT_PATH / 'src'\nFFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'",
+        "peekOfCode": "ROOT_PATH = Path(__file__).resolve().parent.parent\nSRC_PATH = ROOT_PATH / 'src'\nFFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = SRC_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'",
         "detail": "src.const",
         "documentation": {}
     },
@@ -221,7 +212,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "SRC_PATH = ROOT_PATH / 'src'\nFFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'",
+        "peekOfCode": "SRC_PATH = ROOT_PATH / 'src'\nFFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = SRC_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'",
         "detail": "src.const",
         "documentation": {}
     },
@@ -230,7 +221,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "FFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'",
+        "peekOfCode": "FFMPEG_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffmpeg.exe\"\nFFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = SRC_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'",
         "detail": "src.const",
         "documentation": {}
     },
@@ -239,7 +230,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "FFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20",
+        "peekOfCode": "FFPROBE_PATH = ROOT_PATH / \"venv\" / \\\n    \"Lib\" / \"site-packages\" / \"ffmpeg\" / \"bin\" / \"ffprobe.exe\"\nASSETS_PATH = SRC_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1",
         "detail": "src.const",
         "documentation": {}
     },
@@ -248,7 +239,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "ASSETS_PATH = ROOT_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]",
+        "peekOfCode": "ASSETS_PATH = SRC_PATH / \"assets\"\nTEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20",
         "detail": "src.const",
         "documentation": {}
     },
@@ -257,7 +248,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "TEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300",
+        "peekOfCode": "TEMP_PATH = SRC_PATH / 'temp'\nSTOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]",
         "detail": "src.const",
         "documentation": {}
     },
@@ -266,7 +257,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "STOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "peekOfCode": "STOCK_VIDEO_PATH = TEMP_PATH / 'stock_video'\nPOST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300",
         "detail": "src.const",
         "documentation": {}
     },
@@ -275,7 +266,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "POST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "peekOfCode": "POST_VIDEO_PATH = TEMP_PATH / 'post_video'\nCOMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -284,7 +275,7 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "COMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "peekOfCode": "COMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'\nPOST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -293,7 +284,16 @@
         "kind": 5,
         "importPath": "src.const",
         "description": "src.const",
-        "peekOfCode": "POST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "peekOfCode": "POST_AUDIO_PATH = TEMP_PATH / 'post_audio'\nPOST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
+        "detail": "src.const",
+        "documentation": {}
+    },
+    {
+        "label": "POST_SUBTITLE_PATH",
+        "kind": 5,
+        "importPath": "src.const",
+        "description": "src.const",
+        "peekOfCode": "POST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'\nMIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1\nMAX_COMMENTS = 20\nMAX_PARSED_COMMENTS = 20\nTARGET_LEVELS = [1]\nMAX_CHAR_COUNT_QUESTION = 300\nDEBUG = True",
         "detail": "src.const",
         "documentation": {}
     },
@@ -365,7 +365,7 @@
         "kind": 2,
         "importPath": "src.utils",
         "description": "src.utils",
-        "peekOfCode": "def clear_directory(directory) -> None:\n    if os.path.exists(directory):\n        shutil.rmtree(directory)\n    os.mkdir(directory)\ndef to_number(formatted_int) -> int:\n    if formatted_int.endswith('k'):\n        formatted_int = float(formatted_int.replace('k', ''))*1000\n    return int(formatted_int)",
+        "peekOfCode": "def clear_directory(directory) -> None:\n    if os.path.exists(directory):\n        shutil.rmtree(directory)\n    os.mkdir(directory)\ndef to_number(formatted_int) -> int:\n    if formatted_int.endswith('k'):\n        formatted_int = float(formatted_int.replace('k', ''))*1000\n    return int(formatted_int)\ndef get_audio_len(path):\n    audio_len = float(os.popen(",
         "detail": "src.utils",
         "documentation": {}
     },
@@ -374,7 +374,16 @@
         "kind": 2,
         "importPath": "src.utils",
         "description": "src.utils",
-        "peekOfCode": "def to_number(formatted_int) -> int:\n    if formatted_int.endswith('k'):\n        formatted_int = float(formatted_int.replace('k', ''))*1000\n    return int(formatted_int)",
+        "peekOfCode": "def to_number(formatted_int) -> int:\n    if formatted_int.endswith('k'):\n        formatted_int = float(formatted_int.replace('k', ''))*1000\n    return int(formatted_int)\ndef get_audio_len(path):\n    audio_len = float(os.popen(\n        f'{FFPROBE_PATH} -hide_banner -loglevel error -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {path}').read().replace('\\n', ''))\n    return audio_len",
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "get_audio_len",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def get_audio_len(path):\n    audio_len = float(os.popen(\n        f'{FFPROBE_PATH} -hide_banner -loglevel error -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {path}').read().replace('\\n', ''))\n    return audio_len",
         "detail": "src.utils",
         "documentation": {}
     },
@@ -383,7 +392,7 @@
         "kind": 6,
         "importPath": "src.video_maker",
         "description": "src.video_maker",
-        "peekOfCode": "class VideoMaker(object):\n    def __init__(self):\n        load_dotenv(SRC_PATH / '.env')\n        self.clean_repo()\n    def generate_video(self) -> None:\n        print(\"Generating video...\")\n        reddit_post_url = \"https://www.reddit.com/r/AmItheAsshole/comments/ql79c7/aita_for_saying_if_my_sister_is_too_stupid_to/\"\n        def scrape_post():\n            print(f\"Scraping post @ {reddit_post_url}...\")\n            self.scraper = scraper(reddit_post_url)",
+        "peekOfCode": "class VideoMaker(object):\n    def __init__(self, post_url: str):\n        load_dotenv(SRC_PATH / '.env')\n        self.post_url = post_url\n        self.clean_temp()\n    def generate_video(self, keywords=None) -> None:\n        print(\"Generating video...\")\n        def scrape_post():\n            print(f\"Scraping post @ {self.post_url}...\")\n            self.scraper = scraper(self.post_url)",
         "detail": "src.video_maker",
         "documentation": {}
     },

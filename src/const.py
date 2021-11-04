@@ -11,7 +11,7 @@ FFMPEG_PATH = ROOT_PATH / "venv" / \
 FFPROBE_PATH = ROOT_PATH / "venv" / \
     "Lib" / "site-packages" / "ffmpeg" / "bin" / "ffprobe.exe"
 
-ASSETS_PATH = ROOT_PATH / "assets"
+ASSETS_PATH = SRC_PATH / "assets"
 
 TEMP_PATH = SRC_PATH / 'temp'
 
@@ -22,6 +22,8 @@ POST_VIDEO_PATH = TEMP_PATH / 'post_video'
 COMMENTS_AUDIO_PATH = TEMP_PATH / 'comments_audio'
 
 POST_AUDIO_PATH = TEMP_PATH / 'post_audio'
+
+POST_SUBTITLE_PATH = TEMP_PATH / 'post_subtitle'
 
 MIN_NUMBER_UPVOTES_COMMENT_PERCENTAGE = .1
 

@@ -1,40 +1,35 @@
 from .scraper import scraper
 import requests
 from .const import *
+from .utils import *
 import os
 from dotenv import load_dotenv
 import nltk
 
 
 class VideoMaker(object):
-    def __init__(self):
+    def __init__(self, post_url: str):
         load_dotenv(SRC_PATH / '.env')
-        self.clean_repo()
+        self.post_url = post_url
+        self.clean_temp()
 
-    def generate_video(self) -> None:
+    def generate_video(self, keywords=None) -> None:
         print("Generating video...")
-        reddit_post_url = "https://www.reddit.com/r/AmItheAsshole/comments/ql79c7/aita_for_saying_if_my_sister_is_too_stupid_to/"
 
         def scrape_post():
-            print(f"Scraping post @ {reddit_post_url}...")
-            self.scraper = scraper(reddit_post_url)
-            self.scraper.scrape_post(include_comments=False)
+            print(f"Scraping post @ {self.post_url}...")
+            self.scraper = scraper(self.post_url)
+            self.scraper.scrape_post()
 
         def generate_comments():
             self.scraper.post.generate_audio()
-            self.scraper.post.generate_subtitles()
 
-            if hasattr(self.scraper.post, 'comments'):
-                for comment in self.scraper.post.comments:
-                    comment.generate_audio()
-                    comment.generate_subtitles()
-
-        def get_stock_videos():
-            def get_noun_pharse():
+        def get_stock_videos(keywords):
+            def get_search_words():
                 tokenized = nltk.word_tokenize(self.scraper.post.text)
-                self.nouns = [word for (word, pos) in nltk.pos_tag(
+                self.words_to_search = [word for (word, pos) in nltk.pos_tag(
                     tokenized) if(pos == 'NN')]
-                if(len(self.nouns) == 0):
+                if(len(self.words_to_search) == 0):
                     raise Exception(
                         "No nouns found in the post title. Please try again.")
 
@@ -42,13 +37,16 @@ class VideoMaker(object):
                 print("Getting stock videos from Pexels API...")
                 pexels_api_responses = []
 
-                for noun in self.nouns:
+                for word in self.words_to_search:
                     search_videos_page = requests.get(
-                        f"https://api.pexels.com/videos/search?query={noun}&per_page=80&page=1&orientation=portrait", headers={'Authorization': str(os.getenv('PEXELS_API_KEY')), 'Content-Type': 'application/json'})
+                        f"https://api.pexels.com/videos/search?query={word}&per_page=80&page=1&orientation=portrait", headers={'Authorization': str(os.getenv('PEXELS_API_KEY')), 'Content-Type': 'application/json'})
                     pexels_api_responses.append(search_videos_page.json())
 
                 self.sorted_api_responses = sorted(
                     pexels_api_responses, key=lambda x: x['total_results'], reverse=True)
+
+                self.sorted_api_responses = [
+                    x for x in self.sorted_api_responses if(x['total_results'] > 0)]
 
             def download_pexels_videos():
                 print("Downloading videos from Pexels API...")
@@ -90,12 +88,16 @@ class VideoMaker(object):
 
                     total_video_time += video['duration']
 
-                    if(total_video_time > self.scraper.post.audio_len):
+                    if(total_video_time > self.scraper.post.total_audio_len):
                         break
 
                 print(f"Total video time: {total_video_time}")
 
-            get_noun_pharse()
+            if(keywords is None):
+                get_search_words()
+            else:
+                self.words_to_search = keywords
+
             get_pexels_api_results()
             download_pexels_videos()
 
@@ -111,16 +113,14 @@ class VideoMaker(object):
             os.system(
                 f'{FFMPEG_PATH} -hide_banner -loglevel error -i "concat:{joined_audio_files}" -acodec copy {POST_AUDIO_PATH / "post.mp3"} -map_metadata 0:1')
 
-            def get_audio_time():
-                self.scraper.post.audio_len = float(os.popen(
-                    f'{FFPROBE_PATH} -hide_banner -loglevel error -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {POST_AUDIO_PATH / "post.mp3"}').read().replace('\n', ''))
-
-                print(f"audio time: {self.scraper.post.audio_len}s")
-
-            get_audio_time()
+            self.scraper.post.total_audio_len = get_audio_len(
+                POST_AUDIO_PATH / "post.mp3")
 
         def join_video():
             print("Joining videos...")
+            if(len(os.listdir(STOCK_VIDEO_PATH)) == 0):
+                raise Exception(
+                    "No videos found in the stock video folder. Please try again.")
 
             video_files = ["echo file " + str(STOCK_VIDEO_PATH / f).replace('\\', '/') for f in os.listdir(
                 STOCK_VIDEO_PATH) if f.endswith('.mp4')]
@@ -128,10 +128,10 @@ class VideoMaker(object):
             os.system(
                 f"({' & '.join(video_files)})>{STOCK_VIDEO_PATH / 'file_list.txt'}")
             os.system(
-                f'{FFMPEG_PATH} -hide_banner -loglevel error -safe 0 -f concat -i {STOCK_VIDEO_PATH / "file_list.txt"} -c copy {POST_VIDEO_PATH / "post.mp4"}')
+                f'{FFMPEG_PATH} -hide_banner -loglevel error -safe 0 -f concat -i {STOCK_VIDEO_PATH / "file_list.txt"} -i {POST_AUDIO_PATH / "post.mp3"} -c:v copy -c:a aac -strict experimental {POST_VIDEO_PATH / "post.mp4"}')
 
         def crop_video_to_9_16():
-            print("Cropping video to 9:16... (this can take a while)")
+            print("Cropping video to 9:16... (this could take a while)")
 
             if not os.path.exists(POST_VIDEO_PATH / "post.mp4"):
                 raise Exception(
@@ -139,33 +139,39 @@ class VideoMaker(object):
 
             os.system(
                 f'{FFMPEG_PATH} -hide_banner -loglevel error -i {POST_VIDEO_PATH / "post.mp4"} -vf "crop=1080:1920" {POST_VIDEO_PATH / "post_cropped.mp4"}')
-            os.remove(POST_VIDEO_PATH / "post.mp4")
-
-        def join_video_and_audio():
-            print("Joining video and audio...")
-            os.system(
-                f'{FFMPEG_PATH} -hide_banner -loglevel error -i {POST_VIDEO_PATH / "post_cropped.mp4"} -i {POST_AUDIO_PATH / "post.mp3"} -c:v copy -c:a aac -strict experimental {POST_VIDEO_PATH / "post_video_audio.mp4"}')
-            os.remove(POST_VIDEO_PATH / "post_cropped.mp4")
 
         def trim_video():
             print("Trimming video...")
             os.system(
-                f'{FFMPEG_PATH} -hide_banner -loglevel error -i {POST_VIDEO_PATH / "post_video_audio.mp4"} -ss 00:00:00 -t {self.scraper.post.audio_len} {POST_VIDEO_PATH / "post_trimmed.mp4"}')
-            os.remove(POST_VIDEO_PATH / "post_video_audio.mp4")
+                f'{FFMPEG_PATH} -hide_banner -loglevel error -i {POST_VIDEO_PATH / "post_cropped.mp4"} -ss 00:00:00 -t {self.scraper.post.total_audio_len} {POST_VIDEO_PATH / "post_trimmed.mp4"}')
+
+        def generate_subtitles():
+            print("Generating subtitles...")
+            self.scraper.post.generate_subtitles()
+
+        def join_subtitles_ffmpeg():
+            # os.system(
+            #     f'{FFMPEG_PATH} -i {POST_VIDEO_PATH / "post.mp4"} -vf "drawtext=fontfile=/Code/reddit-web-scraping/src/assets/fonts/ProximaNova_Regular.otf:textfile=/Code/reddit-web-scraping/src/temp/post_subtitle/post.srt:reload=1:fontcolor=white:fontsize=24:box=1:boxcolor=black@0.5:boxborderw=5:x=(w-text_w)/2:y=(h-text_h)/2" -codec:a copy {POST_VIDEO_PATH / "post_with_subtitles.mp4"}')
+            # # os.system(
+            #     f'{FFMPEG_PATH} -i {POST_VIDEO_PATH / "post.mp4"} -vf "drawtext=fontfile={str(ASSETS_PATH).replace("C", "") + f"{chr(92)}ProximaNova_Regular.otf"}:textfile={str(POST_SUBTITLE_PATH).replace("C:", "")  + f"{chr(92)}post.srt"}:reload=1:fontcolor=white:fontsize=24:box=1:boxcolor=black@0.5:boxborderw=5:x=(w-text_w)/2:y=(h-text_h)/2" -codec:a copy {POST_VIDEO_PATH / "post_with_subtitles.mp4"}')
+            # os.system(f'{FFMPEG_PATH} -i {POST_VIDEO_PATH / "post.mp4"} -filter_complex "subtitles=/Code/reddit-web-scraping/src/temp/post_subtitle/post.srt" -c:v libx264 -crf 20 -c:a aac -strict experimental -b:a 192k {POST_VIDEO_PATH / "post_with_subtitles.mp4"}')
+            pass
 
         scrape_post()
 
         generate_comments()
         join_audio()
 
-        get_stock_videos()
+        get_stock_videos(keywords)
+
         join_video()
-        crop_video_to_9_16()
+        # crop_video_to_9_16()
+        # trim_video()
 
-        join_video_and_audio()
-        trim_video()
+        generate_subtitles()
+        join_subtitles_ffmpeg()
 
-    def clean_repo(self) -> None:
+    def clean_temp(self) -> None:
         for f in os.listdir(COMMENTS_AUDIO_PATH):
             os.remove(COMMENTS_AUDIO_PATH / f)
         for f in os.listdir(STOCK_VIDEO_PATH):
